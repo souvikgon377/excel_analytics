@@ -1,32 +1,60 @@
+/**
+ * Dashboard.jsx
+ * 
+ * Main dashboard component for Excel Analytics app.
+ * Provides a user interface for:
+ * - Uploading Excel files
+ * - Previewing data
+ * - Selecting analysis types
+ * - Customizing analysis parameters
+ * - Performing data analysis
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
 import './Dashboard.css';
 
+/**
+ * Dashboard component for Excel Analytics app.
+ * Provides UI for uploading Excel files, previewing data,
+ * selecting analysis types, customizing parameters, and performing analysis.
+ */
 const Dashboard = () => {
+  // State to store the selected Excel file
   const [selectedFile, setSelectedFile] = useState(null);
+  // State to store parsed JSON data from the Excel file
   const [data, setData] = useState(null);
+  // React Router hook for navigation
   const navigate = useNavigate();
+  // Ref for file input element to reset its value
   const fileInputRef = useRef(null);
 
+  // Effect hook to add/remove dashboard-specific CSS class on body element
   useEffect(() => {
-    // Add class to body on mount
-    document.body.classList.add('dashboard-page');
-    // Remove class on unmount
+    document.body.classList.add('dashboard-page'); // Add class on mount
     return () => {
-      document.body.classList.remove('dashboard-page');
+      document.body.classList.remove('dashboard-page'); // Remove class on unmount
     };
   }, []);
 
+  /**
+   * Handles file input change event.
+   * Reads and parses the selected Excel file into JSON format.
+   * @param {Event} event - File input change event
+   */
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setSelectedFile(file);
-      // Read and process the Excel file
+
+      // Use FileReader to read file as array buffer
       const reader = new FileReader();
       reader.onload = (e) => {
+        // Convert file data to Uint8Array and parse with XLSX
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
+        // Get first sheet and convert to JSON
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
         const json = XLSX.utils.sheet_to_json(worksheet);
@@ -36,6 +64,10 @@ const Dashboard = () => {
     }
   };
 
+  /**
+   * Clears the selected file and parsed data.
+   * Also resets the file input element.
+   */
   const handleClearSelection = () => {
     setSelectedFile(null);
     setData(null);
@@ -44,20 +76,29 @@ const Dashboard = () => {
     }
   };
 
+  /**
+   * Handles user logout.
+   * Removes auth token from localStorage and navigates to login page.
+   */
   const handleLogout = () => {
-    // Clear any authentication state
     localStorage.removeItem('token');
     navigate('/login');
   };
 
+  // State for selected analysis type (default: barChart)
   const [selectedAnalysis, setSelectedAnalysis] = React.useState('barChart');
+  // State for selected data parameters for analysis
   const [selectedDataParam, setSelectedDataParam] = React.useState([]);
 
+  /**
+   * Placeholder function to handle analysis generation.
+   * Currently shows an alert with selected analysis and parameters.
+   */
   const handleGenerate = () => {
-    // Placeholder for generate analysis logic
     alert(`Generating ${selectedAnalysis} analysis on ${selectedDataParam.length > 0 ? selectedDataParam.join(', ') : 'no parameter selected'}...`);
   };
 
+  // States for form inputs to frame custom analysis questions
   const [summarise, setSummarise] = React.useState('');
   const [and1, setAnd1] = React.useState('');
   const [and2, setAnd2] = React.useState('');
@@ -67,6 +108,11 @@ const Dashboard = () => {
   const [over, setOver] = React.useState('');
   const [using, setUsing] = React.useState('Sum');
 
+  /**
+   * Handles form submission for custom analysis.
+   * Displays an alert with the selected parameters.
+   * @param {Event} e - Form submit event
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Submitted with Summarise: ${summarise}, By: ${by}, Over: ${over}, Using: ${using}, And: [${and1}, ${and2}, ${and3}, ${and4}]`);
@@ -74,6 +120,7 @@ const Dashboard = () => {
 
   return (
     <>
+      {/* Navigation bar */}
       <div className="navbar">
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
           <div className="container-fluid">
@@ -92,32 +139,23 @@ const Dashboard = () => {
                 <li className="nav-item">
                   <a className="nav-link" href="#">Contact</a>
                 </li>
-                {/* <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="#">Action</a></li>
-                    <li><a className="dropdown-item" href="#">Another action</a></li>
-                    <li><hr className="dropdown-divider"/></li>
-                    <li><a className="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li> */}
+                {/* Commented out dropdown and disabled nav items */}
               </ul>
+              {/* Logout button */}
               <button onClick={handleLogout} className="btn btn-primary ms-auto">Logout</button>
             </div>
           </div>
         </nav>
       </div>
+
+      {/* Main dashboard container */}
       <div className="dashboard-container">
         <nav className="dashboard-nav">
           <h1>Visualize Your Data</h1>
         </nav>
 
         <main className="dashboard-main">
+          {/* Section for uploading Excel file */}
           <section className="upload-section">
             <h2>Upload Excel File</h2>
             <input
@@ -130,6 +168,7 @@ const Dashboard = () => {
             <button type="button" className="btn btn-secondary ms-2" onClick={handleClearSelection}>Clear Selection</button>
           </section>
 
+          {/* Data preview and analysis form shown only if data is loaded */}
           {data && (
             <section className="visualization-section">
               <h2>Data Preview</h2>
@@ -163,36 +202,37 @@ const Dashboard = () => {
                         ))}
                       </select>
                     </div>
-            
-                </div>
-                <div className="row mb-2">
-                  <label className="col-sm-3 col-form-label">By</label>
-                  <div className="col-sm-3">
-                    <select
-                      className="form-select"
-                      value={by}
-                      onChange={(e) => setBy(e.target.value)}
-                    >
-                      <option value="">--- SELECT ---</option>
-                      {Object.keys(data[0]).map((col) => (
-                        <option key={col} value={col}>{col}</option>
-                      ))}
-                    </select>
                   </div>
-                  <label className="col-sm-1 col-form-label">And*</label>
-                  <div className="col-sm-2">
-                    <select
-                      className="form-select"
-                      value={and3}
-                      onChange={(e) => setAnd3(e.target.value)}
-                    >
-                      <option value="">--- SELECT ---</option>
-                      {Object.keys(data[0]).map((col) => (
-                        <option key={col} value={col}>{col}</option>
-                      ))}
-                    </select>
+
+                  <div className="row mb-2">
+                    <label className="col-sm-3 col-form-label">By</label>
+                    <div className="col-sm-3">
+                      <select
+                        className="form-select"
+                        value={by}
+                        onChange={(e) => setBy(e.target.value)}
+                      >
+                        <option value="">--- SELECT ---</option>
+                        {Object.keys(data[0]).map((col) => (
+                          <option key={col} value={col}>{col}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <label className="col-sm-1 col-form-label">And*</label>
+                    <div className="col-sm-2">
+                      <select
+                        className="form-select"
+                        value={and3}
+                        onChange={(e) => setAnd3(e.target.value)}
+                      >
+                        <option value="">--- SELECT ---</option>
+                        {Object.keys(data[0]).map((col) => (
+                          <option key={col} value={col}>{col}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-                </div>
+
                   <div className="row mb-2">
                     <label className="col-sm-3 col-form-label">Over*</label>
                     <div className="col-sm-3">
@@ -222,6 +262,7 @@ const Dashboard = () => {
                       </select>
                     </div>
                   </div>
+
                   <div className="row">
                     <div className="col-sm-12 text-center">
                       <button type="submit" className="btn btn-gradient">Submit</button>
@@ -229,6 +270,8 @@ const Dashboard = () => {
                   </div>
                 </form>
               </div>
+
+              {/* Table to display preview of uploaded data */}
               <div className="data-table">
                 <table>
                   <thead>
