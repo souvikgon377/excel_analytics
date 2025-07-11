@@ -309,7 +309,7 @@ const UploadExcel = () => {
           ))}
         </div>
       </div>
-      <div style={{ backgroundColor: 'white', borderRadius: '16px', padding: '2rem', boxShadow: '0 4px 25px rgba(0, 0, 0, 0.08)', display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '1400px', margin: '2rem auto', overflow: 'visible', minHeight: '700px', position: 'relative' }}>
+      <div style={{ backgroundColor: 'white', borderRadius: '16px', padding: '2rem', boxShadow: '0 4px 25px rgba(0, 0, 0, 0.08)', display: 'flex', flexDirection: 'column', width: '96%', maxWidth: '1400px', margin: '2rem auto', overflow: 'visible', minHeight: '700px', position: 'relative' }}>
         <div style={{ width: '100%', height: '100%', minHeight: '600px', position: 'relative', overflow: 'visible' }}>
           {renderChart(chartState.type)}
         </div>
