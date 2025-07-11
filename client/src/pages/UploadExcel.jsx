@@ -259,7 +259,7 @@ const UploadExcel = () => {
         </h2>
       </div>
       <div style={{ marginBottom: '2rem' }}>
-        <input type="file" accept=".xlsx,.xls,.csv" onChange={handleFileUpload} />
+        {/* <input type="file" accept=".xlsx,.xls,.csv" onChange={handleFileUpload} /> */}
         {uploadedFile && <p className="file-info">Uploaded File: {uploadedFile.name}</p>}
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', margin: '1.5rem 0', justifyContent: 'center' }}>
