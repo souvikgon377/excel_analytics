@@ -101,6 +101,18 @@ const Navbar = ({ isAuthenticated = false, user = { name: 'User' }, onLogout }) 
                   </Link>
                 )
               ))}
+              {/* Download App button for mobile menu */}
+              {isMobile && (
+                <a
+                  href="https://drive.google.com/file/d/1bCFAGHdT86DmJ1744hqtyeshwY3av4Wv/view?usp=sharing"
+                  className={styles['navbar-btn']}
+                  style={{ background: 'linear-gradient(90deg, #38bdf8 60%, #2563eb 100%)', color: '#fff', margin: '0.7rem 0 0.2rem 0', display: 'block', textAlign: 'center' }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download App
+                </a>
+              )}
             </>
           ) : (
             <>
@@ -129,6 +141,15 @@ const Navbar = ({ isAuthenticated = false, user = { name: 'User' }, onLogout }) 
               <>
                 <Link to="/login" className={`${styles['navbar-btn']} ${styles.secondary}`}>Login</Link>
                 <Link to="/signup" className={styles['navbar-btn']}>Sign Up</Link>
+                <a
+                  href="https://drive.google.com/file/d/1bCFAGHdT86DmJ1744hqtyeshwY3av4Wv/view?usp=sharing"
+                  className={styles['navbar-btn']}
+                  style={{ background: 'linear-gradient(90deg, #38bdf8 60%, #2563eb 100%)', color: '#fff', marginLeft: '0.5rem' }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download App
+                </a>
               </>
             ) : (
               <div className={`${styles['navbar-profile']}${profileOpen ? ' ' + styles.open : ''}`} ref={profileRef}>
@@ -145,7 +166,7 @@ const Navbar = ({ isAuthenticated = false, user = { name: 'User' }, onLogout }) 
           </>
         )}
         <button
-          className={styles.hamburger}
+          className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
           aria-label="Toggle navigation menu"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen(v => !v)}
