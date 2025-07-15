@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Home.module.css';
 import PricingSection from '../components/PricingSection';
 
@@ -24,6 +24,7 @@ const features = [
 const Home = () => {
   const [headerVisible, setHeaderVisible] = useState(false);
   const [mainVisible, setMainVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => setHeaderVisible(true), 100);
@@ -53,8 +54,10 @@ const Home = () => {
             <div
               key={i}
               className={styles.featureCard}
+              onClick={() => navigate('/login')}
               onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-10px) scale(1.04)'; e.currentTarget.style.boxShadow = '0 8px 32px #a5b4fc'; }}
               onMouseOut={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 24px #e0e7ef'; }}
+              style={{ cursor: 'pointer' }}
             >
               <div className={styles.featureIcon}>{f.icon}</div>
               <div className={styles.featureTitle}>{f.title}</div>
