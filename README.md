@@ -12,7 +12,7 @@ Try the app here: [http://excelinsights.netlify.app/](http://excelinsights.netli
 
 ## 🖼️ Preview
 
-![Excel Analytics Screenshot](client/public/preview_screenshot.png.png)
+![Excel Analytics Screenshot](client/public/preview_screenshot.png)
 *Home page with login, signup, and feature highlights.*
 
 ---
