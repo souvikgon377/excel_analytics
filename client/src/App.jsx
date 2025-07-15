@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import UploadExcel from './pages/UploadExcel';
+import Reports from './pages/Reports';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminUsers from './pages/AdminUsers';
 import AdminFiles from './pages/AdminFiles';
@@ -65,6 +66,7 @@ function AppRoutes({ isAuthenticated, user, setIsAuthenticated, setUser }) {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/uploadexcel" element={<UploadExcel />} />
+        <Route path="/reports" element={<Reports />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/admin" element={<AdminDashboard />}>
