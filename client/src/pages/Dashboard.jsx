@@ -186,9 +186,9 @@ const Dashboard = () => {
             <tbody>
               {files.map(file => (
                 <tr key={file.id}>
-                  <td>{file.name}</td>
-                  <td className={styles['files-date']}>{file.date}</td>
-                  <td>
+                  <td data-label="Filename">{file.name}</td>
+                  <td data-label="Upload Date" className={styles['files-date']}>{file.date}</td>
+                  <td data-label="Actions">
                     <button onClick={() => handleAnalyze(file)} className={styles['analyze-btn']}>Analyze</button>
                     <button
                       className={styles['delete-btn']}

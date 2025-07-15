@@ -136,14 +136,50 @@
   .footerCard {
     padding: 1.2rem 0.5rem 1rem 0.5rem;
     gap: 1.2rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
   .rightSection {
     flex-direction: column;
     gap: 1.2rem;
     min-width: 0;
+    align-items: center;
+    justify-content: center;
   }
   .leftSection {
     min-width: 0;
     max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  .logoRow {
+    justify-content: center;
+  }
+  .socials {
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .socialIcon {
+    font-size: 1.5rem;
+    padding: 0.5rem 0.7rem;
+  }
+  .linkCol {
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 0;
+  }
+  .colTitle {
+    margin-bottom: 0.2rem;
+    font-size: 1.08rem;
+  }
+  .linkCol a {
+    font-size: 1.13rem;
+    padding: 0.2rem 0;
+  }
+  .copyright {
+    font-size: 0.98rem;
+    padding: 1.2rem 0 0.8rem 0;
   }
 } 

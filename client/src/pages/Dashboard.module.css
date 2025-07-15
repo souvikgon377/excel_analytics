@@ -107,4 +107,48 @@
 .delete-btn:hover {
   color: #b91c1c;
   transform: scale(1.2);
+}
+
+/* Responsive styles for Previous Files table */
+@media (max-width: 600px) {
+  .dashboard-card {
+    padding: 0.7rem 0.2rem;
+    margin: 0.5rem;
+  }
+  .files-table, .files-table thead, .files-table tbody, .files-table tr, .files-table th, .files-table td {
+    display: block;
+    width: 100%;
+  }
+  .files-table thead {
+    display: none;
+  }
+  .files-table tr {
+    margin-bottom: 1.2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #e0e7ef;
+    padding: 0.7rem 0.5rem;
+    border: none;
+  }
+  .files-table td {
+    padding: 0.6rem 0.7rem;
+    text-align: left;
+    position: relative;
+    border: none;
+    font-size: 1rem;
+  }
+  .files-table td:before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #2563eb;
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.98rem;
+  }
+  .analyze-btn, .delete-btn {
+    margin-top: 0.5rem;
+    width:90%;
+    font-size: 1.1rem;
+    padding: 0.7rem 0;
+  }
 } 
