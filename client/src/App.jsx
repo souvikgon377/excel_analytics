@@ -20,6 +20,12 @@ import Footer from './components/Footer';
 import './App.css';
 import Contact from './pages/Contact';
 import About from './pages/About';
+import Profile from './pages/Profile';
+import Settings from './pages/Settings';
+import AdminProfile from './pages/AdminProfile';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 function AdminOverview() {
   return (
@@ -44,6 +50,7 @@ function AppRoutes({ isAuthenticated, user, setIsAuthenticated, setUser }) {
   const handleLogin = (userObj) => {
     setIsAuthenticated(true);
     setUser(userObj);
+    toast.success('🎉 Welcome back, ' + (userObj?.name || 'User') + '!', { icon: '🚀' });
     if (userObj && userObj.role === 'admin') {
       navigate('/admin');
     } else {
@@ -54,6 +61,7 @@ function AppRoutes({ isAuthenticated, user, setIsAuthenticated, setUser }) {
   const handleLogout = () => {
     setIsAuthenticated(false);
     setUser(null);
+    toast.info('👋 You have been logged out. See you soon!', { icon: '🔒' });
     navigate('/');
   };
 
@@ -69,12 +77,15 @@ function AppRoutes({ isAuthenticated, user, setIsAuthenticated, setUser }) {
         <Route path="/reports" element={<Reports />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-        <Route path="/admin" element={<AdminDashboard />}>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/admin" element={<AdminDashboard onLogout={handleLogout} />}>
           <Route index element={<AdminOverview />} />
           <Route path="users" element={<AdminUsers />} />
           <Route path="files" element={<AdminFiles />} />
           <Route path="reports" element={<AdminReports />} />
           <Route path="settings" element={<AdminSettings />} />
+          <Route path="profile" element={<AdminProfile />} />
         </Route>
       </Routes>
       {!hideFooter && <Footer />}
@@ -88,6 +99,18 @@ function App() {
 
   return (
     <Router>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <AppRoutes
         isAuthenticated={isAuthenticated}
         user={user}

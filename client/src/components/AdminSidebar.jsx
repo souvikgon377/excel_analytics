@@ -6,6 +6,7 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import styles from '../pages/AdminDashboard.module.css';
 
 const links = [
@@ -14,6 +15,7 @@ const links = [
   { to: '/admin/files', label: 'Uploaded Files', icon: <InsertDriveFileIcon /> },
   { to: '/admin/reports', label: 'Reports', icon: <BarChartIcon /> },
   { to: '/admin/settings', label: 'Settings', icon: <SettingsIcon /> },
+  { to: '/admin/profile', label: 'Profile', icon: <AccountCircleIcon /> },
 ];
 
 const AdminSidebar = () => {

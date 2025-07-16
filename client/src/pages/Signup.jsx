@@ -67,7 +67,7 @@ const Signup = () => {
           onChange={handleChange}
         >
           <option value="user">User</option>
-          <option value="admin">Admin</option>
+          {/* <option value="admin">Admin</option> */}
         </select>
         {error && <div className={styles.error}>{error}</div>}
         <button className={styles.button} type="submit">Sign Up</button>

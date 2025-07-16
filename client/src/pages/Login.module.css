@@ -56,6 +56,7 @@
   background: #f8fafc;
   outline: none;
   color: #22223b;
+  overflow-x: hidden;
 }
 .button {
   margin-top: 0.5rem;
@@ -137,6 +138,7 @@
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    overflow-x: hidden;
   }
   .button {
     font-size: 1.13rem;
