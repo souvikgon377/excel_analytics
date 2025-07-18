@@ -152,4 +152,4 @@ This project is licensed under the ISC License.
 
 ---
 
-**Tip:** Replace `./path-to-your-screenshot.png` with the actual path to your screenshot in the repo.
+
