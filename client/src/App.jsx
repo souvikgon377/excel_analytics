@@ -24,7 +24,7 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import AdminProfile from './pages/AdminProfile';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { toast } from 'react-toastify';
 
 function AdminOverview() {
